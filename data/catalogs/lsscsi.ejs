@@ -1,0 +1,4 @@
+    "cmd": "sudo lsblk -o KNAME,TYPE,ROTA; echo BREAK; sudo lsscsi --size",
+    "stdout": "KNAME TYPE ROTA\nsda   disk    1\nsda1  part    1\nsda2  part    1\nsdb   disk    1\nsr0   rom     1\nloop0 loop    1\nBREAK\n[1:0:0:0]    cd/dvd  QEMU     QEMU DVD-ROM     2.5+  /dev/sr0        -\n[2:0:0:0]    disk    ATA      QEMU HARDDISK    2.5+  /dev/sda   17.1GB\n[3:0:0:0]    disk    ATA      QEMU HARDDISK    2.5+  /dev/sdb   17.1GB\n",
+    "stderr": "",
+    "error": null

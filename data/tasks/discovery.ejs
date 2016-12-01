@@ -1,0 +1,91 @@
+            "name": "discovery",
+            "jobs": [
+                {
+                    <%- include("../jobs/http/get-profile.ejs") %>
+                },
+                {
+                    <%- include("../jobs/tftp/get-ipxe.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-vmlinuz.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-initrd.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-base-squashfs.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-discovery-overlay.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-bootstrap.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-dmi.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-ohai.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-bmc.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-lsall.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-megaraid.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                <%# download get_smart.sh %>
+                {
+                    <%- include("../jobs/http/get-smart-sh.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-smart.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                <%# download get_driveid.js %>
+                {
+                    <%- include("../jobs/http/get-driveid-js.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-driveid.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-lldp.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-set-boot-pxe-completed.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-shell-reboot-completed.ejs") %>
+                }]
