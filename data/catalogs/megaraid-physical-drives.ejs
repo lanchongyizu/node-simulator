@@ -1,0 +1,95 @@
+        "cmd": "sudo /opt/MegaRAID/storcli/storcli64 /c0 /eall /sall show all J",
+        "data": {
+            "Controllers": [
+                {
+                    "Command Status": {
+                        "Controller": 0,
+                        "Description": "Show Drive Information Succeeded.",
+                        "Status": "Success"
+                    },
+                    "Response Data": {
+                        "Drive /c0/e62/s0": [
+                            {
+                                "DG": "F",
+                                "DID": 14,
+                                "EID:Slt": "62:0",
+                                "Intf": "SAS",
+                                "Med": "HDD",
+                                "Model": "HUC10903 CLAR300",
+                                "PI": "N",
+                                "SED": "N",
+                                "SeSz": "512B",
+                                "Size": "278.464 GB",
+                                "Sp": "U",
+                                "State": "UGood"
+                            }
+                        ],
+                        "Drive /c0/e62/s0 - Detailed Information": {
+                            "Drive /c0/e62/s0 Device attributes": {
+                                "Coerced size": "278.464 GB [0x22cee000 Sectors]",
+                                "Connector Name": "Port 4 - 7 x1",
+                                "Device Speed": "6.0Gb/s",
+                                "Firmware Release Number": "        ",
+                                "Firmware Revision": "C430",
+                                "Link Speed": "6.0Gb/s",
+                                "Logical Sector Size": "512B",
+                                "Manufacturer Id": "HITACHI ",
+                                "Model Number": "HUC10903 CLAR300",
+                                "NAND Vendor": "NA",
+                                "Non Coerced size": "278.896 GB [0x22dcb25c Sectors]",
+                                "Physical Sector Size": "512B",
+                                "Raw size": "279.396 GB [0x22ecb25c Sectors]",
+                                "SN": "KFH009LR        ",
+                                "WWN": "5000CCA0543862AB",
+                                "Write cache": "N/A"
+                            },
+                            "Drive /c0/e62/s0 Policies/Settings": {
+                                "Certified": "No",
+                                "Commissioned Spare": "No",
+                                "Connected Port Number": "0(path0) ",
+                                "Emergency Spare": "No",
+                                "Enclosure position": 0,
+                                "Last Predictive Failure Event Sequence Number": 0,
+                                "Locked": "No",
+                                "Needs EKM Attention": "No",
+                                "PI Eligible": "No",
+                                "Port Information": [
+                                    {
+                                        "Linkspeed": "6.0Gb/s",
+                                        "Port": 0,
+                                        "SAS address": "0x5000cca0543862a9",
+                                        "Status": "Active"
+                                    },
+                                    {
+                                        "Linkspeed": "6.0Gb/s",
+                                        "Port": 1,
+                                        "SAS address": "0x0",
+                                        "Status": "Active"
+                                    }
+                                ],
+                                "SED Capable": "No",
+                                "SED Enabled": "No",
+                                "Secured": "No",
+                                "Sequence Number": 1,
+                                "Successful diagnostics completion on": "N/A",
+                                "Wide Port Capable": "No"
+                            },
+                            "Drive /c0/e62/s0 State": {
+                                "Drive Temperature": " 33C (91.40 F)",
+                                "Media Error Count": 0,
+                                "Other Error Count": 0,
+                                "Predictive Failure Count": 0,
+                                "S_M_A_R_T alert flagged by drive": "No",
+                                "Shield Counter": 0
+                            },
+                            "Inquiry Data": "00 00 06 12 9f 01 10 02 48 49 54 41 43 48 49 20 48 55 43 31 30 39 30 33 20 43 4c 41 52 33 30 30 43 34 33 30 4b 46 48 30 30 39 4c 52 20 20 20 20 00 00 00 00 00 00 00 00 44 47 31 31 38 78 78 78 78 78 31 20 20 30 30 35 30 30 30 30 30 30 20 20 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 48 69 74 61 63 68 69 20 43 6f 72 70 2e 20 32 30 30 33 2e 20 41 6c "
+                        }
+                    }
+                }
+            ]
+        },
+        "stdout": "",
+        "stderr": "",
+        "error": null
+
+

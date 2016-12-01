@@ -1,0 +1,36 @@
+{
+  "name": "node-simulator",
+  "version": "0.0.1",
+  "description": "A lightweight node simulator for RackHD developement & testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lanchongyizu/node-simulator.git"
+  },
+  "keywords": [
+    "simulator",
+    "rackhd",
+    "node",
+    "scale",
+    "test"
+  ],
+  "author": "lanchongyizu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lanchongyizu/node-simulator/issues"
+  },
+  "homepage": "https://github.com/lanchongyizu/node-simulator#readme",
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "child-process-promise": "^2.2.0",
+    "ejs": "^2.0.8",
+    "lodash": "^4.15.0",
+    "request": "^2.74.0",
+    "request-promise": "^4.1.1",
+    "tftp": "^0.1.2",
+    "winston": "^2.3.0"
+  }
+}
