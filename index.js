@@ -1,7 +1,8 @@
 'use strict';
 
 var nodeManager = require('./lib/node-manager.js'),
-    taskManager = require('./lib/task-manager.js');
+    taskManager = require('./lib/task-manager.js'),
+    logger = require('./lib/logger.js');
 
 taskManager.start()
 .then(function() {
@@ -11,7 +12,7 @@ taskManager.start()
     process.exit(0);
 })
 .catch(function(err) {
-    console.error(err);
+    logger.error(err);
     process.exit(-1);
 });
 
