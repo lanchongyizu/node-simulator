@@ -6,10 +6,11 @@ var nodeManager = require('./lib/node-manager.js'),
 
 taskManager.start()
 .then(function() {
+    logger.info("Task Manager started");
     return nodeManager.start()
 })
 .then(function() {
-    process.exit(0);
+    logger.info("Node Manager started");
 })
 .catch(function(err) {
     logger.error(err);
