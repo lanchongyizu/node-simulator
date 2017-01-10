@@ -1,7 +1,7 @@
 {
   "name": "node-simulator",
   "version": "0.0.1",
-  "description": "A lightweight node simulator for RackHD developement & testing",
+  "description": "A lightweight node simulator for large scale testing.",
   "main": "index.js",
   "scripts": {
     "test": "npm test"
@@ -12,7 +12,6 @@
   },
   "keywords": [
     "simulator",
-    "rackhd",
     "node",
     "scale",
     "test"
