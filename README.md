@@ -1,6 +1,6 @@
 # node-simulator
 
-The node-simulator is an utility to create light-weight nodes to execute sequence tasks, such as `HTTP` or `TFTP` requests.
+The node-simulator is an utility to create lightweight nodes to execute sequence tasks, such as `HTTP` or `TFTP` requests.
 It can be used to quickly setup large scale testing environment, which is faster than setting up hundreds of VMs.
 
 **Features:**
