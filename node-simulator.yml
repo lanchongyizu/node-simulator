@@ -1,0 +1,4 @@
+apps:
+    - script: index.js
+      name: node-simulator
+      cwd: .
