@@ -28,7 +28,7 @@ The global parameters are configured in [config.js](config.js).
 | parameter | description |
 | --------- | ----------- |
 | httpRequestBase | the http request base **(reserved)** |
-| tftpServer | the global tftp server IP, such as `172.31.128.1` |
+| tftpHost | the global tftp host IP, such as `172.31.128.1` |
 | tftpPort | the global tftp port, such as `69` |
 | headers | the global headers for http requests |
 | fakeIpStart | an four-tuple array which indicates the starting fake IP address, such as [188, 1, 1, 2] |
@@ -47,7 +47,7 @@ Example:
 
 module.exports = {
     httpRequestBase: 'http://172.31.128.1:9080/api/current',
-    tftpServer: '172.31.128.1',
+    tftpHost: '172.31.128.1',
     tftpPort: 69,
     headers: {
         'X-Real-IP': '<?=node.ip?>',
@@ -194,7 +194,7 @@ Currently, only support getting file from tftp server.
 
 | parameter | description |
 | --------- | ----------- |
-| tftpServer | the tftp server IP, which overrides the global configuration |
+| tftpHost | the tftp host IP, which overrides the global configuration |
 | tftpPort | the tftp port, which overrides the global configuration |
 | fileName | the file name |
 
@@ -203,7 +203,7 @@ Example:
 ```
 "log": "Tftp get profile",
 "protocol": "tftp",
-"tftpServer": "172.31.128.1",
+"tftpHost": "172.31.128.1",
 "tftpPort": 69,
 "fileName": "monorail.ipxe",
 "time": 1000

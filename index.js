@@ -7,7 +7,7 @@ var nodeManager = require('./lib/node-manager.js'),
 taskManager.start()
 .then(function() {
     logger.info("Task Manager started");
-    return nodeManager.start()
+    return nodeManager.start();
 })
 .then(function() {
     logger.info("Node Manager started");
