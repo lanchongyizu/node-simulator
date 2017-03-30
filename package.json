@@ -4,7 +4,8 @@
   "description": "A lightweight node simulator for large scale testing.",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "lint": "./node_modules/.bin/jshint **/*.js"
   },
   "repository": {
     "type": "git",
@@ -28,9 +29,13 @@
     "commander": "^2.9.0",
     "ejs": "^2.0.8",
     "lodash": "^4.15.0",
+    "promise-redis": "0.0.5",
     "request": "^2.74.0",
     "request-promise": "^4.1.1",
     "tftp": "^0.1.2",
     "winston": "^2.3.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.4"
   }
 }

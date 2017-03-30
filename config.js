@@ -2,8 +2,10 @@
 
 module.exports = {
     httpRequestBase: 'http://172.31.128.1:9080/api/current',
-    tftpServer: '172.31.128.1',
+    tftpHost: '172.31.128.1',
     tftpPort: 69,
+    redisHost: '127.0.0.1',
+    redisPort: 6379,
     headers: {
         'X-Real-IP': '<?=node.ip?>',
         'X-RackHD-API-proxy-ip': '127.0.0.1',
