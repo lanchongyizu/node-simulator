@@ -6,6 +6,8 @@ module.exports = {
     tftpPort: 69,
     redisHost: '127.0.0.1',
     redisPort: 6379,
+    mongoUri: 'mongodb://localhost/ns',
+    servicePort: 9000,
     headers: {
         'X-Real-IP': '<?=node.ip?>',
         'X-RackHD-API-proxy-ip': '127.0.0.1',
