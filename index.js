@@ -6,6 +6,8 @@ var express = require('express'),
     config = require('./config.js'),
     redisClient = require('./lib/redis-client'),
     waterlineService = require('./lib/api/services/waterline-service'),
+    resourcePool = require('./lib/resource-pool'),
+    taskManager = require('./lib/task-manager'),
     logger = require('./lib/logger.js');
 
 var app = express();
@@ -30,8 +32,12 @@ swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {
 
 redisClient.start();
 waterlineService.start();
+resourcePool.start();
+taskManager.start();
 process.on('SIGINT', function() {
     redisClient.stop();
     waterlineService.stop();
+    resourcePool.stop();
+    taskManager.stop();
     process.exit(1);
 });

@@ -51,11 +51,92 @@
               }
           },
           "x-swagger-router-controller": "nodes"
+      },
+      "/nodegroup": {
+          "post": {
+              "summary": "Node Group",
+              "description": "",
+              "operationId": "postNodegroup",
+              "parameters": [
+                  {
+                      "description": "",
+                      "in": "query",
+                      "name": "count",
+                      "required": true,
+                      "type": "integer"
+                  }
+              ],
+              "tags": [
+                  "Nodegroup"
+              ],
+              "responses": {
+                  "200": {
+                      "description": "",
+                      "schema": {
+                          "items": {
+                              "$ref": "#/definitions/Node"
+                          },
+                          "type": "array"
+                      }
+                  },
+                  "default": {
+                      "description": "Error",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
+              }
+          },
+          "x-swagger-router-controller": "nodegroup"
+      },
+      "/nodegroup/{nodegroupId}/task/{taskName}": {
+          "post": {
+              "summary": "Node Group",
+              "description": "",
+              "operationId": "postTaskByNodegroupId",
+              "parameters": [
+                  {
+                      "description": "",
+                      "in": "path",
+                      "name": "nodegroupId",
+                      "required": true,
+                      "type": "string"
+                  },
+                  {
+                      "description": "",
+                      "in": "path",
+                      "name": "taskName",
+                      "required": true,
+                      "type": "string"
+                  }
+              ],
+              "tags": [
+                  "Nodegroup"
+              ],
+              "responses": {
+                  "200": {
+                      "description": "",
+                      "schema": {
+                          "$ref": "#/definitions/Success"
+                      }
+                  },
+                  "default": {
+                      "description": "Error",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
+              }
+          },
+          "x-swagger-router-controller": "nodegroup"
       }
   },
   "definitions": {
       "Node": {
           "properties": {
+              "nodegroupId": {
+                  "type": "string"
+              },
               "ip": {
                   "type": "string"
               },
@@ -67,8 +148,19 @@
               }
           },
           "required": [
+              "nodegroupId",
               "ip",
               "mac"
+          ]
+      },
+      "Success": {
+          "properties": {
+              "message": {
+                  "type": "string"
+              }
+          },
+          "required": [
+              "message"
           ]
       },
       "Error": {
