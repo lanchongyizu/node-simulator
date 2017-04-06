@@ -1,6 +1,6 @@
 {
   "name": "node-simulator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A lightweight node simulator for large scale testing.",
   "main": "index.js",
   "scripts": {
@@ -28,11 +28,16 @@
     "child-process-promise": "^2.2.0",
     "commander": "^2.9.0",
     "ejs": "^2.0.8",
+    "express": "^4.15.2",
     "lodash": "^4.15.0",
     "promise-redis": "0.0.5",
     "request": "^2.74.0",
     "request-promise": "^4.1.1",
+    "sails-memory": "^0.10.7",
+    "sails-mongo": "^0.12.2",
+    "swagger-tools": "^0.10.1",
     "tftp": "^0.1.2",
+    "waterline": "^0.11.11",
     "winston": "^2.3.0"
   },
   "devDependencies": {
