@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm test",
-    "lint": "./node_modules/.bin/jshint **/*.js"
+    "lint": "./node_modules/.bin/jshint lib index.js config.js"
   },
   "repository": {
     "type": "git",
