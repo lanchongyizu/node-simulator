@@ -108,6 +108,15 @@
                       "name": "taskName",
                       "required": true,
                       "type": "string"
+                  },
+                  {
+                      "description": "",
+                      "in": "body",
+                      "name": "body",
+                      "required": false,
+                      "schema": {
+                          "$ref": "#/definitions/TaskParams"
+                      }
                   }
               ],
               "tags": [
@@ -152,6 +161,16 @@
               "ip",
               "mac"
           ]
+      },
+      "TaskParams": {
+          "properties": {
+              "startDelay": {
+                  "type": "integer"
+              },
+              "delay": {
+                  "type": "integer"
+              }
+          }
       },
       "Success": {
           "properties": {
