@@ -52,6 +52,40 @@
           },
           "x-swagger-router-controller": "nodes"
       },
+      "/nodes/{nodeId}": {
+          "delete": {
+              "summary": "Nodes",
+              "description": "",
+              "operationId": "deleteNodeById",
+              "parameters": [
+                  {
+                      "description": "",
+                      "in": "path",
+                      "name": "nodeId",
+                      "required": true,
+                      "type": "string"
+                  }
+              ],
+              "tags": [
+                  "Nodes"
+              ],
+              "responses": {
+                  "200": {
+                      "description": "",
+                      "schema": {
+                          "$ref": "#/definitions/Success"
+                      }
+                  },
+                  "default": {
+                      "description": "Error",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
+              }
+          },
+          "x-swagger-router-controller": "nodes"
+      },
       "/nodegroup": {
           "post": {
               "summary": "Node Group",
@@ -77,6 +111,74 @@
                               "$ref": "#/definitions/Node"
                           },
                           "type": "array"
+                      }
+                  },
+                  "default": {
+                      "description": "Error",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
+              }
+          },
+          "x-swagger-router-controller": "nodegroup"
+      },
+      "/nodegroup/{nodegroupId}": {
+          "get": {
+              "summary": "Node Group",
+              "description": "",
+              "operationId": "getNodegroupById",
+              "parameters": [
+                  {
+                      "description": "",
+                      "in": "path",
+                      "name": "nodegroupId",
+                      "required": true,
+                      "type": "string"
+                  }
+              ],
+              "tags": [
+                  "Nodegroup"
+              ],
+              "responses": {
+                  "200": {
+                      "description": "",
+                      "schema": {
+                          "items": {
+                              "$ref": "#/definitions/Node"
+                          },
+                          "type": "array"
+                      }
+                  },
+                  "default": {
+                      "description": "Error",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
+              }
+          },
+          "delete": {
+              "summary": "Node Group",
+              "description": "",
+              "operationId": "deleteNodegroupById",
+              "parameters": [
+                  {
+                      "description": "",
+                      "in": "path",
+                      "name": "nodegroupId",
+                      "required": true,
+                      "type": "string"
+                  }
+              ],
+              "tags": [
+                  "Nodegroup"
+              ],
+              "responses": {
+                  "200": {
+                      "description": "",
+                      "schema": {
+                          "$ref": "#/definitions/Success"
                       }
                   },
                   "default": {
