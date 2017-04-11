@@ -2,6 +2,7 @@
 
 var express = require('express'),
     http = require('http'),
+    Promise = require('bluebird'),
     swaggerTools = require('swagger-tools'),
     config = require('./config.js'),
     redisClient = require('./lib/redis-client'),
@@ -18,22 +19,26 @@ var swaggerOptions = {
     userStubs: process.env.NODE_ENV === 'development' ? true : false
 };
 var servicePort = config.servicePort || 9000;
-swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {
-    app.use(middleware.swaggerMetadata());
-    app.use(middleware.swaggerValidator({
-        validateResponse: true
-    }));
-    app.use(middleware.swaggerRouter(swaggerOptions));
-    app.use(middleware.swaggerUi());
-    http.createServer(app).listen(servicePort, function() {
-        logger.info('Node Simulator Service started at Port ' + servicePort);
+Promise.all([
+    redisClient.start(),
+    waterlineService.start(),
+    resourcePool.start(),
+    taskManager.start()
+])
+.then(function() {
+    swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {
+        app.use(middleware.swaggerMetadata());
+        app.use(middleware.swaggerValidator({
+            validateResponse: true
+        }));
+        app.use(middleware.swaggerRouter(swaggerOptions));
+        app.use(middleware.swaggerUi());
+        http.createServer(app).listen(servicePort, function() {
+            logger.info('Node Simulator Service started at Port ' + servicePort);
+        });
     });
 });
 
-redisClient.start();
-waterlineService.start();
-resourcePool.start();
-taskManager.start();
 process.on('SIGINT', function() {
     redisClient.stop();
     waterlineService.stop();
