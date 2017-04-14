@@ -1,0 +1,21 @@
+            "name": "arista-discovery",
+            "jobs": [
+                {
+                    <%- include("../jobs/http/post-lookups.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-arista-switch-profile.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-arista-version.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-shell-reboot-completed.ejs") %>
+                }
+            ]

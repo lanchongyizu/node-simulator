@@ -1,0 +1,24 @@
+            "name": "cisco-discovery",
+            "jobs": [
+                {
+                    <%- include("../jobs/http/post-lookups.ejs") %>
+                },
+                {
+                    <%- include("../jobs/tftp/cisco-poap.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-cisco-switch-profile.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-cisco-version.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-shell-reboot-completed.ejs") %>
+                }
+            ]

@@ -1,0 +1,15 @@
+                    "protocol": "http",
+                    "method": "POST",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "uri": "http://172.31.128.1:9080/api/current/tasks/<?=nodeId?>",
+                    "body": {
+                        "identifier": "<?=nodeId?>",
+                        "tasks":[
+                            {
+                                <%- include("../../catalogs/cisco-version.ejs") %>
+                            }
+                        ]
+                    },
+                    "time": 3287
