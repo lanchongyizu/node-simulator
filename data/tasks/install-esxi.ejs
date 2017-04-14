@@ -59,10 +59,36 @@
                         "X-RackHD-API-proxy-ip": "127.0.0.1",
                         "X-RackHD-API-proxy-port": "7180"
                     },
+                    "uri": "http://172.31.128.1:9080/esxi/6.0/mboot.c32",
+                    "time": 0
+                },
+                {
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
                     "uri": "http://172.31.128.1:9080/api/current/templates/esx-boot-cfg?nodeId=<?=nodeId?>",
                     "time": 0
                 },
                 <%# mirrors %>
+                {
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
+                    "uri": "",
+                    "basePath": "http://172.31.128.1:9080/esxi/6.0",
+                    "baseNames": [
+                        <%- include("../os-mirror/esxi.ejs") %>
+                    ],
+                    "time": 0
+                },
                 {
                     "protocol": "http",
                     "method": "GET",
@@ -96,7 +122,7 @@
                     },
                     "uri": "http://172.31.128.1:9080/api/current/notification/progress?value=5&description=Enter%20Post%20OS%20configuration&maximum=6&taskId=<?=taskId?>",
                     "ignoreFailure": true,
-                    "time": 0
+                    "time": 1200000
                 },
                 {
                     "protocol": "http",
