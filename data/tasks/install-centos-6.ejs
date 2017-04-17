@@ -1,0 +1,155 @@
+            "name": "install-centos-6",
+            "jobs": [
+                {
+                    <%- include("../jobs/http/put-noop-obm.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-install-centos-6.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-profile-without-macs-ips.ejs") %>
+                },
+                {
+                    "log": "Http get profile",
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
+                    "uri": "http://172.31.128.1:9080/api/current/profiles?macs=<?=node.mac?>&ips=<?=node.ip?>",
+                    "regularExpressionExtractor": {
+                        "regularExpression": "taskId=([a-z0-9-]*)",
+                        "referenceName": "taskId",
+                        "matchNumber": 1
+                    },
+                    "time": 2000
+                },
+                {
+                    <%- include("../jobs/tftp/get-ipxe.ejs") %>
+                },
+                {
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
+                    "uri": "http://172.31.128.1:9080/api/current/notification/progress?value=2&description=Enter%20profile%2C%20start%20to%20download%20installer&maximum=6&taskId=<?=taskId?>",
+                    "ignoreFailure": true,
+                    "time": 0
+                },
+                {
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
+                    "uri": "http://172.31.128.1:9080/centos/6.5/os/x86_64/vmlinuz",
+                    "time": 0
+                },
+                {
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
+                    "uri": "http://172.31.128.1:9080/centos/6.5/os/x86_64/initrd.img",
+                    "time": 0
+                },
+                {
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
+                    "uri": "http://172.31.128.1:9080/api/current/notification/progress?value=3&description=Start%20installer%20and%20prepare%20installation&maximum=6&taskId=<?=taskId?>",
+                    "ignoreFailure": true,
+                    "time": 0
+                },
+                {
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
+                    "uri": "http://172.31.128.1:9080/api/current/templates/centos-ks?nodeId=<?=nodeId?>",
+                    "time": 0
+                },
+                {
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
+                    "uri": "http://172.31.128.1:9080/centos/6.5/os/x86_64/install.img",
+                    "time": 0
+                },
+                {
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
+                    "uri": "http://172.31.128.1:9080/api/current/notification/progress?value=4&description=Enter%20Pre%20OS%20configuration&maximum=6&taskId=<?=taskId?>",
+                    "ignoreFailure": true,
+                    "time": 0
+                },
+                {
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
+                    "uri": "",
+                    "basePath": "http://172.31.128.1:9080/centos/6.5/os/x86_64",
+                    "baseNames": [
+                        <%- include("../os-mirror/centos-6.ejs") %>
+                    ],
+                    "time": 0
+                },
+                {
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
+                    "uri": "http://172.31.128.1:9080/api/current/notification/progress?value=5&description=Enter%20Post%20OS%20configuration&maximum=6&taskId=<?=taskId?>",
+                    "ignoreFailure": true,
+                    "time": 1200000
+                },
+                {
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
+                    "uri": "http://172.31.128.1:9080/api/current/templates/centos.rackhdcallback?nodeId=<?=nodeId?>",
+                    "time": 0
+                },
+                {
+                    <%- include("../jobs/http/post-notification.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-notification.ejs") %>
+                }]
