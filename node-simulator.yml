@@ -1,4 +1,5 @@
 apps:
     - script: index.js
       name: node-simulator
+      node_args: "--max_old_space_size=4096"
       cwd: .
