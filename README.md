@@ -147,7 +147,7 @@ Example:
 | parameter | description |
 | --------- | ----------- |
 | protocol | the protocol to execute the job(`http` or `tftp`) |
-| time | the delay before the job |
+| delayBefore | the delay before the job |
 | log | **(optional)** the log info for the job |
 
 * **HTTP parameters**
@@ -185,7 +185,7 @@ Example:
     "referenceName": "nodeId",
     "matchNumber": 1
 },
-"time": 1000
+"delayBefore": 1000
 ```
 
 * **TFTP parameters**
@@ -206,5 +206,6 @@ Example:
 "tftpHost": "172.31.128.1",
 "tftpPort": 69,
 "fileName": "monorail.ipxe",
-"time": 1000
+"delayBefore": 1000
 ```
+

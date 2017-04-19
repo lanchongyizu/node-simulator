@@ -8,11 +8,11 @@
                 },
                 {
                     <%- include("../jobs/tftp/get-ipxe.ejs") %>,
-                    "time": 17064
+                    "delayBefore": 17064
                 },
                 {
                     <%- include("../jobs/http/get-profile-without-macs-ips.ejs") %>,
-                    "time": 587
+                    "delayBefore": 587
                 },
                 {
                     "log": "Http get profile",
@@ -29,7 +29,7 @@
                         "referenceName": "taskId",
                         "matchNumber": 1
                     },
-                    "time": 187
+                    "delayBefore": 187
                 },
                 {
                     "protocol": "http",
@@ -41,7 +41,7 @@
                     },
                     "uri": "http://172.31.128.1:9080/api/current/notification/progress?value=2&description=Enter%20profile%2C%20start%20to%20download%20installer&maximum=6&taskId=<?=taskId?>",
                     "ignoreFailure": true,
-                    "time": 274
+                    "delayBefore": 274
                 },
                 {
                     "protocol": "http",
@@ -52,7 +52,7 @@
                         "X-RackHD-API-proxy-port": "7180"
                     },
                     "uri": "http://172.31.128.1:9080/esxi/6.0/mboot.c32",
-                    "time": 377
+                    "delayBefore": 377
                 },
                 {
                     "protocol": "http",
@@ -64,7 +64,7 @@
                     },
                     "uri": "http://172.31.128.1:9080/api/current/notification/progress?value=3&description=Start%20installer%20and%20prepare%20installation&maximum=6&taskId=<?=taskId?>",
                     "ignoreFailure": true,
-                    "time": 91
+                    "delayBefore": 91
                 },
                 {
                     "protocol": "http",
@@ -75,7 +75,7 @@
                         "X-RackHD-API-proxy-port": "7180"
                     },
                     "uri": "http://172.31.128.1:9080/api/current/templates/esx-boot-cfg?nodeId=<?=nodeId?>",
-                    "time": 73
+                    "delayBefore": 73
                 },
                 {
                     "protocol": "http",
@@ -90,7 +90,7 @@
                     "baseNames": [
                         <%- include("../os-mirror/esxi.ejs") %>
                     ],
-                    "time": 0
+                    "delayBefore": 0
                 },
                 {
                     "protocol": "http",
@@ -101,7 +101,7 @@
                         "X-RackHD-API-proxy-port": "7180"
                     },
                     "uri": "http://172.31.128.1:9080/api/current/templates/esx-ks?nodeId=<?=nodeId?>",
-                    "time": 77838
+                    "delayBefore": 77838
                 },
                 {
                     "protocol": "http",
@@ -113,7 +113,7 @@
                     },
                     "uri": "http://172.31.128.1:9080/api/current/notification/progress?value=4&description=Enter%20Pre%20OS%20configuration&maximum=6&taskId=<?=taskId?>",
                     "ignoreFailure": true,
-                    "time": 109
+                    "delayBefore": 109
                 },
                 {
                     "protocol": "http",
@@ -125,11 +125,11 @@
                     },
                     "uri": "http://172.31.128.1:9080/api/current/notification/progress?value=5&description=Enter%20Post%20OS%20configuration&maximum=6&taskId=<?=taskId?>",
                     "ignoreFailure": true,
-                    "time": 274390
+                    "delayBefore": 274390
                 },
                 {
                     <%- include("../jobs/http/post-notification.ejs") %>,
-                    "time": 124
+                    "delayBefore": 124
                 },
                 {
                     "protocol": "http",
@@ -140,13 +140,14 @@
                         "X-RackHD-API-proxy-port": "7180"
                     },
                     "uri": "http://172.31.128.1:9080/api/current/templates/esx.rackhdcallback?nodeId=<?=nodeId?>",
-                    "time": 117876
+                    "delayBefore": 117876
                 },
                 {
                     <%- include("../jobs/http/post-notification.ejs") %>,
-                    "time": 12681
+                    "delayBefore": 12681
                 },
                 {
                     <%- include("../jobs/http/post-notification.ejs") %>,
-                    "time": 121366
+                    "delayBefore": 121366
                 }]
+
