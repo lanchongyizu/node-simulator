@@ -93,7 +93,11 @@
                     "baseNames": [
                         <%- include("../os-mirror/esxi.ejs") %>
                     ],
-                    "delayBefore": 0
+                    "delayBefore": 0,
+                    "firstDelayBefore": 85,
+                    "firstRandomDelayBefore": [50,100],
+                    "lastDelayAfter": 10,
+                    "lastRandomDelayAfter": [0,20]
                 },
                 {
                     "protocol": "http",
