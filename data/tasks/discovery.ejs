@@ -1,25 +1,35 @@
             "name": "discovery",
             "jobs": [
                 {
-                    <%- include("../jobs/http/get-profile.ejs") %>
-                },
-                {
                     <%- include("../jobs/tftp/get-ipxe.ejs") %>
                 },
                 {
-                    <%- include("../jobs/http/get-vmlinuz.ejs") %>
+                    <%- include("../jobs/http/get-profile-without-macs-ips.ejs") %>,
+                    "time": 693
                 },
                 {
-                    <%- include("../jobs/http/get-initrd.ejs") %>
+                    <%- include("../jobs/http/get-profile.ejs") %>,
+                    "time": 289
                 },
                 {
-                    <%- include("../jobs/http/get-base-squashfs.ejs") %>
+                    <%- include("../jobs/http/get-vmlinuz.ejs") %>,
+                    "time": 205
                 },
                 {
-                    <%- include("../jobs/http/get-discovery-overlay.ejs") %>
+                    <%- include("../jobs/http/get-initrd.ejs") %>,
+                    "time": 72
                 },
                 {
-                    <%- include("../jobs/http/get-bootstrap.ejs") %>
+                    <%- include("../jobs/http/get-base-squashfs.ejs") %>,
+                    "time": 13872
+                },
+                {
+                    <%- include("../jobs/http/get-discovery-overlay.ejs") %>,
+                    "time": 101
+                },
+                {
+                    <%- include("../jobs/http/get-bootstrap.ejs") %>,
+                    "time": 707
                 },
                 {
                     <%- include("../jobs/http/get-task.ejs") %>
