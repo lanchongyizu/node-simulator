@@ -34,7 +34,6 @@ The global parameters are configured in [config.js](config.js).
 | fakeIpStart | an four-tuple array which indicates the starting fake IP address, such as [188, 1, 1, 2] |
 | fakeMacStart | an six-tuple array which indicates the starting fake MAC address, such as [0xF1, 0xF2, 1, 1, 1, 1] |
 | outputDirectory | **(optional)** the output directory for temporary downloaded files, the default value is 'tmp/' |
-| nodesTemplate | the nodes configuration file, such as `data/nodes.ejs` |
 | tasksTemplate | the tasks configuration file, such as `data/tasks.ejs` |
 | logLevel | **(optional)** the log level, the default value is `info` |
 | logFile | **(optional)** the log file, the default value is `node-simulator.log` |
@@ -57,7 +56,6 @@ module.exports = {
     fakeIpStart: [188, 1, 1, 2],
     fakeMacStart: [0xF1, 0xF2, 1, 1, 1, 1],
     outputDirectory: 'tmp/',
-    nodesTemplate: "data/nodes.ejs",
     tasksTemplate: "data/tasks.ejs",
     logLevel: "info",
     logFile: "node-simulator.log"
