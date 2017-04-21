@@ -17,6 +17,8 @@ module.exports = {
     fakeMacStart: [0xF1, 0xF2, 1, 1, 1, 1],
     outputDirectory: 'tmp/',
     tasksTemplate: "data/tasks.ejs",
-    logLevel: "info",
+    logConsoleLevel: "info",
+    logFileLevel: "info",
+    logFileMaxSize: 1048576,
     logFile: "node-simulator.log"
 };
