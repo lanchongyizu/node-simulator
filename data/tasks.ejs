@@ -4,13 +4,16 @@
             <%- include("tasks/discovery.ejs") %>
         },
         {
+            <%- include("tasks/discovery-without-kernel.ejs") %>
+        },
+        {
+            <%- include("tasks/discovery-with-noop-obm.ejs") %>
+        },
+        {
             <%- include("tasks/cisco-discovery.ejs") %>
         },
         {
             <%- include("tasks/arista-discovery.ejs") %>
-        },
-        {
-            <%- include("tasks/discovery-with-noop-obm.ejs") %>
         },
         {
             <%- include("tasks/tftp.ejs") %>
