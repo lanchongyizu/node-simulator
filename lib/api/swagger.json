@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "node-simulator",
+    "title": "Node Simulator",
     "version": "0.0.1"
   },
   "schemes": [

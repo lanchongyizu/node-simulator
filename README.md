@@ -1,7 +1,7 @@
-# node-simulator
+# Node Simulator
 
-The node-simulator is an application to create lightweight nodes to execute sequence tasks, such as `HTTP` or `TFTP` requests.
-It can be used to quickly setup large scale testing environment, which is faster than setting up hundreds of VMs.
+Node Simulator is an application to create lightweight nodes to execute sequence tasks, such as `HTTP` or `TFTP` requests.
+It can be used to quickly setup large scale testing environment, which is faster than setting up hundreds of VMs or Physical Machines.
 
 **Features:**
 * http request
@@ -10,6 +10,11 @@ It can be used to quickly setup large scale testing environment, which is faster
 * variable runtime extracting and rendering
 * summary report(TODO)
 
+## Prequisites
+
+* MongoDB
+* Redis
+
 ## Quick start
 
 ```
@@ -17,7 +22,16 @@ git clone https://github.com/lanchongyizu/node-simulator.git
 cd node-simulator
 npm install
 npm start
+# Or use pm2 to start Node Simulator
+pm2 start node-simulator.yml
+# Check the code quality:
+npm run lint
 ```
+
+Visit the swagger UI on http://{host}:{port}/docs.
+
+* use `POST /nodegroup` to create a group of nodes
+* use `POST /nodegroup/{nodegroupId}/task/{taskName}` to run `taskName` on Node Group `nodegroupId`
 
 ## Configuration
 
@@ -30,6 +44,10 @@ The global parameters are configured in [config.js](config.js).
 | httpRequestBase | the http request base **(reserved)**                                                                                                                                                     |
 | tftpHost        | the global tftp host IP, such as `172.31.128.1`                                                                                                                                          |
 | tftpPort        | the global tftp port, such as `69`                                                                                                                                                       |
+| redisHost       | the global redis host IP, such as `127.0.0.1`                                                                                                                                            |
+| redisPort       | the global redis port, such as `6379`                                                                                                                                                    |
+| mongoUri        | the URI of MongoDB, such as `mongodb://localhost/ns`                                                                                                                                     |
+| servicePort     | the port of Node Simulator, such as `9000`                                                                                                                                               |
 | headers         | the global headers for http requests                                                                                                                                                     |
 | fakeIpStart     | an four-tuple array which indicates the starting fake IP address, such as [188, 1, 1, 2]                                                                                                 |
 | fakeMacStart    | an six-tuple array which indicates the starting fake MAC address, such as [0xF1, 0xF2, 1, 1, 1, 1]                                                                                       |
@@ -68,7 +86,7 @@ module.exports = {
 
 ## Data
 
-The node-simulator uses `ejs` template engine to render the data, and it has two passes.
+The Node Simulator uses `ejs` template engine to render the data, and it has two passes.
 The first pass renders `<%= %>`, and the second pass renders `<?= ?>` which works at the runtime.
 
 ### Tasks
@@ -114,11 +132,31 @@ Example:
 
 * **Common parameters**
 
-| parameter   | description                                       |
-| :---------- | :------------------------------------------------ |
-| protocol    | the protocol to execute the job(`http` or `tftp`) |
-| delayBefore | the delay before the job                          |
-| log         | **(optional)** the log info for the job           |
+`randomDelay*` has priority over `delay*`.
+If `ignoreFailure` is set to `true`, `retry` and `retryDelay` don't work.
+
+| parameter         | description                                                                                     |
+| :---------------- | :-------------------------------------------------------------------------------------------    |
+| protocol          | the protocol to execute the job(`http` or `tftp`)                                               |
+| delayBefore       | **(optional)** the delay before the job                                                         |
+| delayAfter        | **(optional)** the delay after the job                                                          |
+| randomDelayBefore | **(optional)** the random range of the delay before the job, e.g.`[500, 600]`                   |
+| randomDelayAfter  | **(optional)** the random range of the delay after the job, e.g.`[500, 600]`                    |
+| retry             | **(optional)** the times to retry the job when it fails, and `-1` means that it retries forever |
+| retryDelay        | **(optional)** the delay between the retries                                                    |
+| log               | **(optional)** the log info for the job                                                         |
+| ignoreFailure     | **(optional)** whether to ignore the failure of the job, the default value is `false`           |
+
+* **Batch jobs parameters**
+
+Batch jobs have the same `Common parameters`. And we also provide below parameters to override some parameters of the first and last job.
+
+| parameter              | description                                                                          |
+| :--------------------  | :----------------------------------------------------------------------------------- |
+| firstDelayBefore       | **(optional)** the delay before the first job                                        |
+| lastDelayAfter         | **(optional)** the delay after the last job                                          |
+| firstRandomDelayBefore | **(optional)** the random range of the delay before the first job, e.g.`[500, 600]`  |
+| lastRandomDelayAfter   | **(optional)** the random range of the delay after the last job, e.g.`[500, 600]`    |
 
 * **HTTP parameters**
 
@@ -127,8 +165,11 @@ Example:
 | method                     | the method for http request(`GET`,`POST`..)                                                                         |
 | headers                    | the headers for the request, which overrides the global configuration                                               |
 | uri                        | the uri for http request                                                                                            |
+| basePath                   | the basePath for http batch request, used together with baseNames which disables `uri`                              |
+| baseNames                  | the baseNames for http batch request                                                                                |
 | regularExpressionExtractor | **(optional)** an object includes the extracting parameters, please refer to the `regularExpressionExtractor` table |
 | body                       | **(optional)** the body for `POST` request                                                                          |
+| saveFile                   | **(optional)** whether to save the response, the default value is `false`                                           |
 
 
 **regularExpressionExtractor:**
