@@ -1,4 +1,4 @@
-# Node Simulator
+# Node Simulator [![Build Status](https://travis-ci.org/lanchongyizu/node-simulator.svg?branch=master)](https://travis-ci.org/lanchongyizu/node-simulator)
 
 Node Simulator is an application to create lightweight nodes to execute sequence tasks, such as `HTTP` or `TFTP` requests.
 It can be used to quickly setup large scale testing environment, which is faster than setting up hundreds of VMs or Physical Machines.
@@ -14,6 +14,7 @@ It can be used to quickly setup large scale testing environment, which is faster
 
 * MongoDB
 * Redis
+* RabbitMQ
 
 ## Quick start
 
@@ -32,6 +33,21 @@ Visit the swagger UI on http://{host}:{port}/docs.
 
 * use `POST /nodegroup` to create a group of nodes
 * use `POST /nodegroup/{nodegroupId}/task/{taskName}` to run `taskName` on Node Group `nodegroupId`
+
+## Use Docker to run Node Simulator
+
+[Docker Engine 1.13.0+](https://www.docker.com/community-edition) and [Docker Compose 1.10+](https://docs.docker.com/compose) are required.
+
+```
+cd node-simulator
+
+# Use Docker Compose
+docker-compose up
+
+# Or use the swarm mode
+docker swarm init
+docker stack deploy -c docker-compose.yml node-simulator
+```
 
 ## Configuration
 

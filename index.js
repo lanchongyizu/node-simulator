@@ -5,6 +5,7 @@ var express = require('express'),
     Promise = require('bluebird'),
     swaggerTools = require('swagger-tools'),
     config = require('./config.js'),
+    redisClient = require('./lib/redis-client'),
     waterlineService = require('./lib/api/services/waterline-service'),
     resourcePool = require('./lib/resource-pool'),
     taskManager = require('./lib/task-manager'),
@@ -19,6 +20,7 @@ var swaggerOptions = {
 };
 var servicePort = config.servicePort || 9000;
 Promise.all([
+    redisClient.start(),
     waterlineService.start(),
     resourcePool.start(),
     taskManager.start()
@@ -38,6 +40,7 @@ Promise.all([
 });
 
 process.on('SIGINT', function() {
+    redisClient.stop();
     waterlineService.stop();
     resourcePool.stop();
     taskManager.stop();

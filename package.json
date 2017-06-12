@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "npm test",
+    "test": "./node_modules/.bin/mocha $(find spec -name '*-spec.js') -R spec",
     "lint": "./node_modules/.bin/jshint lib index.js config.js"
   },
   "repository": {
@@ -47,6 +47,7 @@
     "winston": "^2.3.0"
   },
   "devDependencies": {
-    "jshint": "^2.9.4"
+    "jshint": "^2.9.4",
+    "mocha": "^3.4.2"
   }
 }

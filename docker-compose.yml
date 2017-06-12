@@ -1,0 +1,20 @@
+version: '3'
+services:
+  mongo: # 27017
+    image: mongo:latest
+  rabbitmq: # 5672
+    image: rabbitmq:management
+  redis: # 6379
+    image: redis:latest
+  node-simulator: # 9000
+    build: "."
+    depends_on:
+      - mongo
+      - rabbitmq
+    environment:
+        - MONGODB_URI=mongodb://mongo/ns
+        - REDIS_HOST=redis
+        - AMQP_URI=amqp://rabbitmq
+    ports:
+        - "9000:9000"
+    image: lanchongyizu/node-simulator:latest

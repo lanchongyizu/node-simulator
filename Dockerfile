@@ -1,8 +1,10 @@
 FROM nodesource/wheezy:4.4.6
 
-COPY . /node-simulator
 WORKDIR /node-simulator
+COPY . /node-simulator
 
 RUN npm install --ignore-scripts --production
+
+EXPOSE 9000
 
 CMD [ "node", "/node-simulator/index.js" ]
