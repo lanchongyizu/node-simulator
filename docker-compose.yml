@@ -2,7 +2,7 @@ version: '3'
 services:
   mongo: # 27017
     image: mongo:latest
-  rabbitmq: # 5672
+  rabbitmq: # 5672 15672
     image: rabbitmq:management
   redis: # 6379
     image: redis:latest
@@ -11,6 +11,7 @@ services:
     depends_on:
       - mongo
       - rabbitmq
+      - redis
     environment:
         - MONGODB_URI=mongodb://mongo/ns
         - REDIS_HOST=redis
@@ -18,3 +19,23 @@ services:
     ports:
         - "9000:9000"
     image: lanchongyizu/node-simulator:latest
+    command: ./wait-for-dependencies.sh node index.js
+  node-simulator-taskrunner:
+    build: "."
+    depends_on:
+      - mongo
+      - rabbitmq
+      - redis
+    environment:
+        - MONGODB_URI=mongodb://mongo/ns
+        - REDIS_HOST=redis
+        - AMQP_URI=amqp://rabbitmq
+    deploy:
+        replicas: 5
+        update_config:
+            parallelism: 2
+            delay: 10s
+        restart_policy:
+            condition: on-failure
+    image: lanchongyizu/node-simulator:latest
+    command: ./wait-for-dependencies.sh node app.js

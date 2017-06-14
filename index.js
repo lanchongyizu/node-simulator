@@ -9,6 +9,7 @@ var express = require('express'),
     waterlineService = require('./lib/api/services/waterline-service'),
     resourcePool = require('./lib/resource-pool'),
     taskManager = require('./lib/task-manager'),
+    taskQueue = require('./lib/task-queue.js'),
     logger = require('./lib/logger.js');
 
 var app = express();
@@ -23,6 +24,7 @@ Promise.all([
     redisClient.start(),
     waterlineService.start(),
     resourcePool.start(),
+    taskQueue.init(),
     taskManager.start()
 ])
 .then(function() {
@@ -43,6 +45,7 @@ process.on('SIGINT', function() {
     redisClient.stop();
     waterlineService.stop();
     resourcePool.stop();
+    taskQueue.close();
     taskManager.stop();
     process.exit(1);
 });

@@ -7,4 +7,4 @@ RUN npm install --ignore-scripts --production
 
 EXPOSE 9000
 
-CMD [ "node", "/node-simulator/index.js" ]
+CMD [ "node", "index.js" ]
