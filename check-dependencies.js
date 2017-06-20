@@ -8,7 +8,7 @@ var Promise = require('bluebird'),
 return Promise.all([
     redisClient.start(),
     waterlineService.start(),
-    taskQueue.init()
+    taskQueue.start()
 ])
 .catch(function(e) {
     console.log(e);

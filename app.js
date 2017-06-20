@@ -2,6 +2,7 @@
 
 var Promise = require('bluebird'),
     redisClient = require('./lib/redis-client'),
+    statsdClient = require('./lib/statsd-client'),
     waterlineService = require('./lib/api/services/waterline-service'),
     resourcePool = require('./lib/resource-pool'),
     taskManager = require('./lib/task-manager'),
@@ -12,9 +13,10 @@ var Promise = require('bluebird'),
 
 Promise.all([
     redisClient.start(),
+    statsdClient.start(),
     waterlineService.start(),
     resourcePool.start(),
-    taskQueue.init(),
+    taskQueue.start(),
     taskManager.start()
 ])
 .then(function() {
@@ -30,19 +32,20 @@ Promise.all([
         })
         .then(function(jobs) {
             logger.debug(jobs);
-            return new TaskRunner(node, jobs).init().start();
+            return new TaskRunner(node, jobs).start();
         })
         .catch(function(e) {
-            logger.error(e.message + '\n' + node.getPrintInfo());
+            logger.error(e.message + '\n' + task);
         });
     });
 });
 
 process.on('SIGINT', function() {
     redisClient.stop();
+    statsdClient.stop();
     waterlineService.stop();
     resourcePool.stop();
-    taskQueue.close();
+    taskQueue.stop();
     taskManager.stop();
     process.exit(1);
 });

@@ -33,6 +33,7 @@
     "express": "^4.15.2",
     "lodash": "^4.15.0",
     "moment": "^2.18.1",
+    "node-statsd": "^0.1.1",
     "node-uuid": "^1.4.8",
     "pmx": "^1.1.0",
     "promise-redis": "0.0.5",

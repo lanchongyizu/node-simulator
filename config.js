@@ -8,6 +8,8 @@ module.exports = {
     redisPort: 6379,
     mongoUri: process.env.MONGODB_URI || 'mongodb://localhost/ns',
     amqpUri: process.env.AMQP_URI || 'amqp://localhost',
+    statsdHost: '127.0.0.1',
+    statsdPort: 9125,
     servicePort: 9000,
     headers: {
         'X-Real-IP': '<?=node.ip?>',

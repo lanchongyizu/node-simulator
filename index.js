@@ -6,6 +6,7 @@ var express = require('express'),
     swaggerTools = require('swagger-tools'),
     config = require('./config.js'),
     redisClient = require('./lib/redis-client'),
+    statsdClient = require('./lib/statsd-client'),
     waterlineService = require('./lib/api/services/waterline-service'),
     resourcePool = require('./lib/resource-pool'),
     taskManager = require('./lib/task-manager'),
@@ -22,9 +23,10 @@ var swaggerOptions = {
 var servicePort = config.servicePort || 9000;
 Promise.all([
     redisClient.start(),
+    statsdClient.start(),
     waterlineService.start(),
     resourcePool.start(),
-    taskQueue.init(),
+    taskQueue.start(),
     taskManager.start()
 ])
 .then(function() {
@@ -43,9 +45,10 @@ Promise.all([
 
 process.on('SIGINT', function() {
     redisClient.stop();
+    statsdClient.stop();
     waterlineService.stop();
     resourcePool.stop();
-    taskQueue.close();
+    taskQueue.stop();
     taskManager.stop();
     process.exit(1);
 });
