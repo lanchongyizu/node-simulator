@@ -1,0 +1,33 @@
+            "name": "download-esxi",
+            "jobs": [
+                {
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
+                    "uri": "http://172.31.128.1:9080/esxi/6.0/mboot.c32",
+                    "delayBefore": 377
+                },
+                {
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
+                    "uri": "",
+                    "basePath": "http://172.31.128.1:9080/esxi/6.0",
+                    "baseNames": [
+                        <%- include("../os-mirror/esxi.ejs") %>
+                    ],
+                    "delayBefore": 0,
+                    "firstDelayBefore": 85,
+                    "firstRandomDelayBefore": [50,100],
+                    "lastDelayAfter": 10,
+                    "lastRandomDelayAfter": [0,20]
+                }]
+

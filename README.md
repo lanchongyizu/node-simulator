@@ -25,6 +25,13 @@ npm install
 npm start
 # Or use pm2 to start Node Simulator
 pm2 start node-simulator.yml
+
+# Start runners
+git clone https://github.com/lanchongyizu/node-simulator.git
+cd node-simulator
+npm install
+node app.js
+
 # Check the code quality:
 npm run lint
 ```
