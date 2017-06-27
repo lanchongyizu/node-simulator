@@ -32,7 +32,7 @@ Promise.all([
         })
         .then(function(jobs) {
             logger.debug(jobs);
-            return new TaskRunner(node, jobs).start();
+            return new TaskRunner(task.taskId, node, jobs).start();
         })
         .catch(function(e) {
             logger.error(e.message + '\n' + task);
