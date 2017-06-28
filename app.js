@@ -15,10 +15,12 @@ Promise.all([
     redisClient.start(),
     statsdClient.start(),
     waterlineService.start(),
-    resourcePool.start(),
     taskQueue.start(),
     taskManager.start()
 ])
+.then(function() {
+    return resourcePool.start();
+})
 .then(function() {
     logger.info('Node Simulator Task Runner started.');
     return taskQueue.consume(function(task) {

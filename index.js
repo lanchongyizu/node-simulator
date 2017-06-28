@@ -25,10 +25,12 @@ Promise.all([
     redisClient.start(),
     statsdClient.start(),
     waterlineService.start(),
-    resourcePool.start(),
     taskQueue.start(),
     taskManager.start()
 ])
+.then(function() {
+    return resourcePool.start();
+})
 .then(function() {
     swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {
         app.use(middleware.swaggerMetadata());
