@@ -38,8 +38,8 @@ npm run lint
 
 Visit the swagger UI on http://{host}:{port}/docs.
 
-* use `POST /nodegroup` to create a group of nodes
-* use `POST /nodegroup/{nodegroupId}/task/{taskName}` to run `taskName` on Node Group `nodegroupId`
+* use `POST /nodegroups` to create a group of nodes
+* use `POST /nodegroups/{nodegroupId}/tasks/{taskName}` to run `taskName` on Node Group `nodegroupId`
 
 ## Use Docker to run Node Simulator
 

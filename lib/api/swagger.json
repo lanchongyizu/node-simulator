@@ -86,7 +86,7 @@
           },
           "x-swagger-router-controller": "nodes"
       },
-      "/nodegroup": {
+      "/nodegroups": {
           "post": {
               "summary": "Node Group",
               "description": "",
@@ -101,7 +101,7 @@
                   }
               ],
               "tags": [
-                  "Nodegroup"
+                  "Nodegroups"
               ],
               "responses": {
                   "200": {
@@ -121,9 +121,9 @@
                   }
               }
           },
-          "x-swagger-router-controller": "nodegroup"
+          "x-swagger-router-controller": "nodegroups"
       },
-      "/nodegroup/{nodegroupId}": {
+      "/nodegroups/{nodegroupId}": {
           "get": {
               "summary": "Node Group",
               "description": "",
@@ -138,7 +138,7 @@
                   }
               ],
               "tags": [
-                  "Nodegroup"
+                  "Nodegroups"
               ],
               "responses": {
                   "200": {
@@ -172,7 +172,7 @@
                   }
               ],
               "tags": [
-                  "Nodegroup"
+                  "Nodegroups"
               ],
               "responses": {
                   "200": {
@@ -189,9 +189,9 @@
                   }
               }
           },
-          "x-swagger-router-controller": "nodegroup"
+          "x-swagger-router-controller": "nodegroups"
       },
-      "/nodegroup/{nodegroupId}/task/{taskName}": {
+      "/nodegroups/{nodegroupId}/tasks/{taskName}": {
           "post": {
               "summary": "Node Group",
               "description": "",
@@ -222,7 +222,7 @@
                   }
               ],
               "tags": [
-                  "Nodegroup"
+                  "Nodegroups"
               ],
               "responses": {
                   "200": {
@@ -239,7 +239,43 @@
                   }
               }
           },
-          "x-swagger-router-controller": "nodegroup"
+          "x-swagger-router-controller": "nodegroups"
+      },
+      "/tasks/{taskId}/result": {
+          "get": {
+              "summary": "Task Result",
+              "description": "",
+              "operationId": "getTaskResultById",
+              "parameters": [
+                  {
+                      "description": "",
+                      "in": "path",
+                      "name": "taskId",
+                      "required": true,
+                      "type": "string"
+                  }
+              ],
+              "tags": [
+                  "Tasks"
+              ],
+              "responses": {
+                  "200": {
+                      "description": "",
+                      "schema": {
+                          "items": {
+                              "$ref": "#/definitions/TaskResult"
+                          }
+                      }
+                  },
+                  "default": {
+                      "description": "Error",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
+              }
+          },
+          "x-swagger-router-controller": "tasks"
       }
   },
   "definitions": {
@@ -283,6 +319,44 @@
                   "type": "string"
               },
               "nodegroupId": {
+                  "type": "string"
+              }
+          }
+      },
+      "TaskResult": {
+          "properties": {
+              "id": {
+                  "type": "string"
+              },
+              "taskName": {
+                  "type": "string"
+              },
+              "nodegroupId": {
+                  "type": "string"
+              },
+              "taskrunner": {
+                  "items": {
+                      "$ref": "#/definitions/TaskRunner"
+                  },
+                  "type": "array"
+              }
+          }
+      },
+      "TaskRunner": {
+          "properties": {
+              "id": {
+                  "type": "string"
+              },
+              "task": {
+                  "type": "string"
+              },
+              "nodeId": {
+                  "type": "string"
+              },
+              "status": {
+                  "type": "string"
+              },
+              "description": {
                   "type": "string"
               }
           }

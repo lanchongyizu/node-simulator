@@ -25,7 +25,18 @@ Promise.all([
     logger.info('Node Simulator Task Runner started.');
     return taskQueue.consume(function(task) {
         var node = new Node(task.ip, task.mac, task.taskName, task.nodeDelay);
-        return Promise.delay(task.nodeDelay)
+        var taskrunnerId;
+        return waterlineService.taskrunners.create({
+            nodeId: task.nodeId,
+            task: task.taskId,
+            status: 'running',
+            description: 'Task Running.'
+        })
+        .then(function(taskrunner) {
+            logger.debug(taskrunner);
+            taskrunnerId = taskrunner.id;
+        })
+        .delay(task.nodeDelay)
         .then(function() {
             return node.loadEnv();
         })
@@ -34,10 +45,16 @@ Promise.all([
         })
         .then(function(jobs) {
             logger.debug(jobs);
-            return new TaskRunner(task.taskId, node, jobs).start();
+            return new TaskRunner(taskrunnerId, node, jobs).start();
         })
         .catch(function(e) {
-            logger.error(e.message + '\n' + task);
+            waterlineService.taskrunners.update({
+                id: taskrunnerId
+            }, {
+                status: 'failed',
+                description: e.message
+            });
+            logger.error(e.message + '\n' + JSON.stringify(task));
         });
     });
 });

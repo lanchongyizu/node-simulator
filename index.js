@@ -17,7 +17,7 @@ var app = express();
 
 var swaggerDoc = require('./lib/api/swagger.json');
 var swaggerOptions = {
-    controllers: './lib/api/controllers',
+    controllers: __dirname + '/lib/api/controllers',
     userStubs: process.env.NODE_ENV === 'development' ? true : false
 };
 var servicePort = config.servicePort || 9000;
