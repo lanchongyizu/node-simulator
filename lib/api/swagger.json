@@ -276,6 +276,78 @@
               }
           },
           "x-swagger-router-controller": "tasks"
+      },
+      "/taskrunners/{taskrunnerId}/result": {
+          "get": {
+              "summary": "Taskrunner Result",
+              "description": "",
+              "operationId": "getTaskrunnerResultById",
+              "parameters": [
+                  {
+                      "description": "",
+                      "in": "path",
+                      "name": "taskrunnerId",
+                      "required": true,
+                      "type": "string"
+                  }
+              ],
+              "tags": [
+                  "Taskrunners"
+              ],
+              "responses": {
+                  "200": {
+                      "description": "",
+                      "schema": {
+                          "items": {
+                              "$ref": "#/definitions/TaskRunner"
+                          }
+                      }
+                  },
+                  "default": {
+                      "description": "Error",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
+              }
+          },
+          "x-swagger-router-controller": "tasks"
+      },
+      "/jobs/{jobId}/result": {
+          "get": {
+              "summary": "Job Result",
+              "description": "",
+              "operationId": "getJobResultById",
+              "parameters": [
+                  {
+                      "description": "",
+                      "in": "path",
+                      "name": "jobId",
+                      "required": true,
+                      "type": "string"
+                  }
+              ],
+              "tags": [
+                  "Jobs"
+              ],
+              "responses": {
+                  "200": {
+                      "description": "",
+                      "schema": {
+                          "items": {
+                              "$ref": "#/definitions/Job"
+                          }
+                      }
+                  },
+                  "default": {
+                      "description": "Error",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
+              }
+          },
+          "x-swagger-router-controller": "tasks"
       }
   },
   "definitions": {
@@ -325,7 +397,7 @@
       },
       "TaskResult": {
           "properties": {
-              "id": {
+              "taskId": {
                   "type": "string"
               },
               "taskName": {
@@ -334,7 +406,7 @@
               "nodegroupId": {
                   "type": "string"
               },
-              "taskrunner": {
+              "taskrunners": {
                   "items": {
                       "$ref": "#/definitions/TaskRunner"
                   },
@@ -344,13 +416,38 @@
       },
       "TaskRunner": {
           "properties": {
-              "id": {
+              "taskrunnerId": {
                   "type": "string"
               },
               "task": {
                   "type": "string"
               },
               "nodeId": {
+                  "type": "string"
+              },
+              "status": {
+                  "type": "string"
+              },
+              "description": {
+                  "type": "string"
+              },
+              "jobs": {
+                  "items": {
+                      "$ref": "#/definitions/Job"
+                  },
+                  "type": "array"
+              }
+          }
+      },
+      "Job": {
+          "properties": {
+              "jobId": {
+                  "type": "string"
+              },
+              "taskrunner": {
+                  "type": "string"
+              },
+              "executeTime": {
                   "type": "string"
               },
               "status": {

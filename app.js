@@ -30,7 +30,7 @@ Promise.all([
             nodeId: task.nodeId,
             task: task.taskId,
             status: 'running',
-            description: 'Task Running.'
+            description: 'Task is running.'
         })
         .then(function(taskrunner) {
             logger.debug(taskrunner);
@@ -48,13 +48,15 @@ Promise.all([
             return new TaskRunner(taskrunnerId, node, jobs).start();
         })
         .catch(function(e) {
-            waterlineService.taskrunners.update({
+            return waterlineService.taskrunners.update({
                 id: taskrunnerId
             }, {
                 status: 'failed',
                 description: e.message
+            })
+            .then(function() {
+                return logger.error(e.message + '\n' + JSON.stringify(task));
             });
-            logger.error(e.message + '\n' + JSON.stringify(task));
         });
     });
 });
