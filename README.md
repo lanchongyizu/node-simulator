@@ -8,7 +8,7 @@ It can be used to quickly setup large scale testing environment, which is faster
 * tftp request
 * sequence tasks
 * variable runtime extracting and rendering
-* summary report(TODO)
+* result query
 
 ## Prequisites
 

@@ -73,7 +73,7 @@
                   "200": {
                       "description": "",
                       "schema": {
-                          "$ref": "#/definitions/Success"
+                          "$ref": "#/definitions/Node"
                       }
                   },
                   "default": {
@@ -87,6 +87,33 @@
           "x-swagger-router-controller": "nodes"
       },
       "/nodegroups": {
+          "get": {
+              "summary": "Node Group",
+              "description": "",
+              "operationId": "getAllNodegroups",
+              "parameters": [
+              ],
+              "tags": [
+                  "Nodegroups"
+              ],
+              "responses": {
+                  "200": {
+                      "description": "",
+                      "schema": {
+                          "items": {
+                              "$ref": "#/definitions/NodeGroup"
+                          },
+                          "type": "array"
+                      }
+                  },
+                  "default": {
+                      "description": "Error",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
+              }
+          },
           "post": {
               "summary": "Node Group",
               "description": "",
@@ -107,10 +134,7 @@
                   "200": {
                       "description": "",
                       "schema": {
-                          "items": {
-                              "$ref": "#/definitions/Node"
-                          },
-                          "type": "array"
+                          "$ref": "#/definitions/NodeGroup"
                       }
                   },
                   "default": {
@@ -144,10 +168,7 @@
                   "200": {
                       "description": "",
                       "schema": {
-                          "items": {
-                              "$ref": "#/definitions/Node"
-                          },
-                          "type": "array"
+                          "$ref": "#/definitions/NodeGroup"
                       }
                   },
                   "default": {
@@ -178,7 +199,7 @@
                   "200": {
                       "description": "",
                       "schema": {
-                          "$ref": "#/definitions/Success"
+                          "$ref": "#/definitions/NodeGroup"
                       }
                   },
                   "default": {
@@ -351,9 +372,26 @@
       }
   },
   "definitions": {
-      "Node": {
+      "NodeGroup": {
           "properties": {
               "nodegroupId": {
+                  "type": "string"
+              },
+              "nodes": {
+                  "items": {
+                      "$ref": "#/definitions/Node"
+                  },
+                  "type": "array"
+              }
+          },
+          "required": [
+              "nodegroupId",
+              "nodes"
+          ]
+      },
+      "Node": {
+          "properties": {
+              "nodegroup": {
                   "type": "string"
               },
               "ip": {
@@ -367,9 +405,10 @@
               }
           },
           "required": [
-              "nodegroupId",
+              "nodegroup",
               "ip",
-              "mac"
+              "mac",
+              "nodeId"
           ]
       },
       "TaskParams": {
@@ -393,7 +432,12 @@
               "nodegroupId": {
                   "type": "string"
               }
-          }
+          },
+          "required": [
+              "taskId",
+              "taskName",
+              "nodegroupId"
+          ]
       },
       "TaskResult": {
           "properties": {
@@ -412,7 +456,13 @@
                   },
                   "type": "array"
               }
-          }
+          },
+          "required": [
+              "taskId",
+              "taskName",
+              "nodegroupId",
+              "taskrunners"
+          ]
       },
       "TaskRunner": {
           "properties": {
@@ -437,7 +487,15 @@
                   },
                   "type": "array"
               }
-          }
+          },
+          "required": [
+              "taskrunnerId",
+              "task",
+              "nodeId",
+              "status",
+              "description",
+              "jobs"
+          ]
       },
       "Job": {
           "properties": {
@@ -456,7 +514,13 @@
               "description": {
                   "type": "string"
               }
-          }
+          },
+          "required": [
+              "jobId",
+              "taskrunner",
+              "status",
+              "description"
+          ]
       },
       "Success": {
           "properties": {
@@ -472,10 +536,14 @@
           "properties": {
               "message": {
                   "type": "string"
+              },
+              "status": {
+                  "type": "integer"
               }
           },
           "required": [
-              "message"
+              "message",
+              "status"
           ]
       }
   }
