@@ -3,6 +3,7 @@
 var express = require('express'),
     http = require('http'),
     Promise = require('bluebird'),
+    utility = require('./lib/utility.js'),
     swaggerTools = require('swagger-tools'),
     config = require('./config.js'),
     redisClient = require('./lib/redis-client'),
@@ -39,6 +40,7 @@ Promise.all([
         }));
         app.use(middleware.swaggerRouter(swaggerOptions));
         app.use(middleware.swaggerUi());
+        app.use(utility.errorHandler);
         http.createServer(app).listen(servicePort, function() {
             logger.info('Node Simulator Service started at Port ' + servicePort);
         });

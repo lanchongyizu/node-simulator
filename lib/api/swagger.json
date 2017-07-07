@@ -2,13 +2,13 @@
   "swagger": "2.0",
   "info": {
     "title": "Node Simulator",
-    "version": "0.0.1"
+    "version": "1.0.0"
   },
   "schemes": [
     "http",
     "https"
   ],
-  "basePath": "/api/1.0",
+  "basePath": "/api/v1",
   "consumes": [
     "application/json"
   ],
@@ -18,13 +18,13 @@
   "tags": [
     {
       "description": "Node Simulator 1.0 API",
-      "name": "/api/1.0"
+      "name": "/api/v1"
     }
   ],
   "paths": {
       "/nodes": {
           "get": {
-              "summary": "Nodes",
+              "summary": "Get all nodes",
               "description": "",
               "operationId": "getAllNodes",
               "parameters": [
@@ -54,7 +54,7 @@
       },
       "/nodes/{nodeId}": {
           "delete": {
-              "summary": "Nodes",
+              "summary": "Delete node by nodeId",
               "description": "",
               "operationId": "deleteNodeById",
               "parameters": [
@@ -76,6 +76,12 @@
                           "$ref": "#/definitions/Node"
                       }
                   },
+                  "404": {
+                      "description": "Node not found",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  },
                   "default": {
                       "description": "Error",
                       "schema": {
@@ -88,7 +94,7 @@
       },
       "/nodegroups": {
           "get": {
-              "summary": "Node Group",
+              "summary": "Get all groups of nodes",
               "description": "",
               "operationId": "getAllNodegroups",
               "parameters": [
@@ -115,7 +121,7 @@
               }
           },
           "post": {
-              "summary": "Node Group",
+              "summary": "Create a group of nodes",
               "description": "",
               "operationId": "postNodegroup",
               "parameters": [
@@ -124,7 +130,9 @@
                       "in": "query",
                       "name": "count",
                       "required": true,
-                      "type": "integer"
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 2000
                   }
               ],
               "tags": [
@@ -135,6 +143,12 @@
                       "description": "",
                       "schema": {
                           "$ref": "#/definitions/NodeGroup"
+                      }
+                  },
+                  "400": {
+                      "description": "Invalid count, which should between 1 and 2000; No IP or MAC address available",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
                       }
                   },
                   "default": {
@@ -149,7 +163,7 @@
       },
       "/nodegroups/{nodegroupId}": {
           "get": {
-              "summary": "Node Group",
+              "summary": "Get a group of nodes by nodegroupId",
               "description": "",
               "operationId": "getNodegroupById",
               "parameters": [
@@ -180,7 +194,7 @@
               }
           },
           "delete": {
-              "summary": "Node Group",
+              "summary": "Delete a group of nodes by nodegroupId",
               "description": "",
               "operationId": "deleteNodegroupById",
               "parameters": [
@@ -202,6 +216,12 @@
                           "$ref": "#/definitions/NodeGroup"
                       }
                   },
+                  "404": {
+                      "description": "Nodegroup not found",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  },
                   "default": {
                       "description": "Error",
                       "schema": {
@@ -214,7 +234,7 @@
       },
       "/nodegroups/{nodegroupId}/tasks/{taskName}": {
           "post": {
-              "summary": "Node Group",
+              "summary": "Run task on a group of nodes by nodegroupId",
               "description": "",
               "operationId": "postTaskByNodegroupId",
               "parameters": [
@@ -252,6 +272,12 @@
                           "$ref": "#/definitions/TaskResponse"
                       }
                   },
+                  "404": {
+                      "description": "Task not found; Nodes not found under nodegroup",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  },
                   "default": {
                       "description": "Error",
                       "schema": {
@@ -262,9 +288,9 @@
           },
           "x-swagger-router-controller": "nodegroups"
       },
-      "/tasks/{taskId}/result": {
+      "/results/tasks/{taskId}": {
           "get": {
-              "summary": "Task Result",
+              "summary": "Get task result by taskId",
               "description": "",
               "operationId": "getTaskResultById",
               "parameters": [
@@ -277,7 +303,7 @@
                   }
               ],
               "tags": [
-                  "Tasks"
+                  "Results"
               ],
               "responses": {
                   "200": {
@@ -298,9 +324,9 @@
           },
           "x-swagger-router-controller": "tasks"
       },
-      "/taskrunners/{taskrunnerId}/result": {
+      "/results/taskrunners/{taskrunnerId}": {
           "get": {
-              "summary": "Taskrunner Result",
+              "summary": "Get taskrunner result by taskrunnerId",
               "description": "",
               "operationId": "getTaskrunnerResultById",
               "parameters": [
@@ -313,7 +339,7 @@
                   }
               ],
               "tags": [
-                  "Taskrunners"
+                  "Results"
               ],
               "responses": {
                   "200": {
@@ -334,9 +360,9 @@
           },
           "x-swagger-router-controller": "tasks"
       },
-      "/jobs/{jobId}/result": {
+      "/results/jobs/{jobId}": {
           "get": {
-              "summary": "Job Result",
+              "summary": "Get job result by jobId",
               "description": "",
               "operationId": "getJobResultById",
               "parameters": [
@@ -349,7 +375,7 @@
                   }
               ],
               "tags": [
-                  "Jobs"
+                  "Results"
               ],
               "responses": {
                   "200": {

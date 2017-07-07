@@ -1,7 +1,14 @@
-# Node Simulator [![Build Status](https://travis-ci.org/lanchongyizu/node-simulator.svg?branch=master)](https://travis-ci.org/lanchongyizu/node-simulator)
+# Node Simulator
 
-Node Simulator is an application to create lightweight nodes to execute sequence tasks, such as `HTTP` or `TFTP` requests.
+[![Build Status](https://travis-ci.org/lanchongyizu/node-simulator.svg?branch=master)](https://travis-ci.org/lanchongyizu/node-simulator)
+
+Node Simulator is an application to create virtual lightweight node clusters to execute sequence tasks, such as `HTTP` or `TFTP` requests.
 It can be used to quickly setup large scale testing environment, which is faster than setting up hundreds of VMs or Physical Machines.
+
+![Design Diagram](/img/design_diagram.png)
+
+* Tasks are evenly distributed on workers.
+* Taskrunner is a node instance.
 
 **Features:**
 * http request
