@@ -1,15 +1,18 @@
-            "name": "install-esxi",
+            "name": "install-centos-6-with-graph",
             "jobs": [
                 {
+                    <%- include("../jobs/http/put-noop-obm.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-install-centos-6.ejs") %>
+                },
+                {
                     <%- include("../jobs/tftp/get-ipxe.ejs") %>,
-                    "delayBefore": 17064
+                    "delayBefore": 17786
                 },
                 {
                     <%- include("../jobs/http/get-profile-without-macs-ips.ejs") %>,
-                    "delayBefore": 587,
-                    "randomDelayBefore": [500,600],
-                    "delayAfter": 0,
-                    "randomDelayAfter": [0,0]
+                    "delayBefore": 588
                 },
                 {
                     "log": "Http get profile",
@@ -26,7 +29,7 @@
                         "referenceName": "taskId",
                         "matchNumber": 1
                     },
-                    "delayBefore": 187
+                    "delayBefore": 216
                 },
                 {
                     "protocol": "http",
@@ -38,7 +41,7 @@
                     },
                     "uri": "http://172.31.128.1:9080/api/current/notification/progress?value=2&description=Enter%20profile%2C%20start%20to%20download%20installer&maximum=6&taskId=<?=taskId?>",
                     "ignoreFailure": true,
-                    "delayBefore": 274
+                    "delayBefore": 293
                 },
                 {
                     "protocol": "http",
@@ -48,8 +51,19 @@
                         "X-RackHD-API-proxy-ip": "127.0.0.1",
                         "X-RackHD-API-proxy-port": "7180"
                     },
-                    "uri": "http://172.31.128.1:9080/esxi/6.0/mboot.c32",
-                    "delayBefore": 377
+                    "uri": "http://172.31.128.1:9080/centos/6.5/os/x86_64/images/pxeboot/vmlinuz",
+                    "delayBefore": 75
+                },
+                {
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
+                    "uri": "http://172.31.128.1:9080/centos/6.5/os/x86_64/images/pxeboot/initrd.img",
+                    "delayBefore": 65
                 },
                 {
                     "protocol": "http",
@@ -61,7 +75,7 @@
                     },
                     "uri": "http://172.31.128.1:9080/api/current/notification/progress?value=3&description=Start%20installer%20and%20prepare%20installation&maximum=6&taskId=<?=taskId?>",
                     "ignoreFailure": true,
-                    "delayBefore": 91
+                    "delayBefore": 136
                 },
                 {
                     "protocol": "http",
@@ -71,8 +85,8 @@
                         "X-RackHD-API-proxy-ip": "127.0.0.1",
                         "X-RackHD-API-proxy-port": "7180"
                     },
-                    "uri": "http://172.31.128.1:9080/api/current/templates/esx-boot-cfg?nodeId=<?=nodeId?>",
-                    "delayBefore": 73
+                    "uri": "http://172.31.128.1:9080/api/current/templates/centos-ks?nodeId=<?=nodeId?>",
+                    "delayBefore": 21432
                 },
                 {
                     "protocol": "http",
@@ -82,27 +96,8 @@
                         "X-RackHD-API-proxy-ip": "127.0.0.1",
                         "X-RackHD-API-proxy-port": "7180"
                     },
-                    "uri": "",
-                    "basePath": "http://172.31.128.1:9080/esxi/6.0",
-                    "baseNames": [
-                        <%- include("../os-mirror/esxi.ejs") %>
-                    ],
-                    "delayBefore": 0,
-                    "firstDelayBefore": 85,
-                    "firstRandomDelayBefore": [50,100],
-                    "lastDelayAfter": 10,
-                    "lastRandomDelayAfter": [0,20]
-                },
-                {
-                    "protocol": "http",
-                    "method": "GET",
-                    "headers": {
-                        "X-Real-IP": "<?=node.ip?>",
-                        "X-RackHD-API-proxy-ip": "127.0.0.1",
-                        "X-RackHD-API-proxy-port": "7180"
-                    },
-                    "uri": "http://172.31.128.1:9080/api/current/templates/esx-ks?nodeId=<?=nodeId?>",
-                    "delayBefore": 77838
+                    "uri": "http://172.31.128.1:9080/centos/6.5/os/x86_64/images/install.img",
+                    "delayBefore": 8428
                 },
                 {
                     "protocol": "http",
@@ -114,7 +109,22 @@
                     },
                     "uri": "http://172.31.128.1:9080/api/current/notification/progress?value=4&description=Enter%20Pre%20OS%20configuration&maximum=6&taskId=<?=taskId?>",
                     "ignoreFailure": true,
-                    "delayBefore": 109
+                    "delayBefore": 2975
+                },
+                {
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
+                    "uri": "",
+                    "basePath": "http://172.31.128.1:9080/centos/6.5/os/x86_64",
+                    "baseNames": [
+                        <%- include("../os-mirror/centos-6.ejs") %>
+                    ],
+                    "delayBefore": 0
                 },
                 {
                     "protocol": "http",
@@ -126,11 +136,7 @@
                     },
                     "uri": "http://172.31.128.1:9080/api/current/notification/progress?value=5&description=Enter%20Post%20OS%20configuration&maximum=6&taskId=<?=taskId?>",
                     "ignoreFailure": true,
-                    "delayBefore": 274390
-                },
-                {
-                    <%- include("../jobs/http/post-notification.ejs") %>,
-                    "delayBefore": 124
+                    "delayBefore": 34015
                 },
                 {
                     "protocol": "http",
@@ -140,15 +146,15 @@
                         "X-RackHD-API-proxy-ip": "127.0.0.1",
                         "X-RackHD-API-proxy-port": "7180"
                     },
-                    "uri": "http://172.31.128.1:9080/api/current/templates/esx.rackhdcallback?nodeId=<?=nodeId?>",
-                    "delayBefore": 117876
+                    "uri": "http://172.31.128.1:9080/api/current/templates/centos.rackhdcallback?nodeId=<?=nodeId?>",
+                    "delayBefore": 7
                 },
                 {
                     <%- include("../jobs/http/post-notification.ejs") %>,
-                    "delayBefore": 12681
+                    "delayBefore": 17
                 },
                 {
                     <%- include("../jobs/http/post-notification.ejs") %>,
-                    "delayBefore": 121366
+                    "delayBefore": 57423
                 }]
 

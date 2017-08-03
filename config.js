@@ -16,6 +16,13 @@ module.exports = {
         'X-RackHD-API-proxy-ip': '127.0.0.1',
         'X-RackHD-API-proxy-port': '7180'
     },
+    webhook: {
+        nodeId: 'nodeId',
+        taskName: 'data.graphName',
+        taskMaps: {
+            'InstallEsxi': 'install-esxi'
+        },
+    },
     fakeIpStart: [188, 1, 1, 2],
     fakeMacStart: [0xF1, 0xF2, 1, 1, 1, 1],
     outputDirectory: __dirname + '/tmp/',

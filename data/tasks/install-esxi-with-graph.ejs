@@ -1,5 +1,11 @@
-            "name": "install-esxi",
+            "name": "install-esxi-with-graph",
             "jobs": [
+                {
+                    <%- include("../jobs/http/put-noop-obm.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-install-esxi.ejs") %>
+                },
                 {
                     <%- include("../jobs/tftp/get-ipxe.ejs") %>,
                     "delayBefore": 17064

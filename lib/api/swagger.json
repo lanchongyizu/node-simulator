@@ -52,6 +52,42 @@
           },
           "x-swagger-router-controller": "nodes"
       },
+      "/nodes/task": {
+          "post": {
+              "summary": "Run task on a node by third party webhook",
+              "description": "",
+              "operationId": "postTaskByContextNodeId",
+              "parameters": [
+                  {
+                      "description": "",
+                      "in": "body",
+                      "name": "body",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/NodeTaskParams"
+                      }
+                  }
+              ],
+              "tags": [
+                  "Nodes"
+              ],
+              "responses": {
+                  "200": {
+                      "description": "",
+                      "schema": {
+                          "$ref": "#/definitions/TaskResponse"
+                      }
+                  },
+                  "default": {
+                      "description": "Error",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
+              }
+          },
+          "x-swagger-router-controller": "nodes"
+      },
       "/nodes/{nodeId}": {
           "delete": {
               "summary": "Delete node by nodeId",
@@ -258,7 +294,7 @@
                       "name": "body",
                       "required": false,
                       "schema": {
-                          "$ref": "#/definitions/TaskParams"
+                          "$ref": "#/definitions/GroupTaskParams"
                       }
                   }
               ],
@@ -437,7 +473,21 @@
               "nodeId"
           ]
       },
-      "TaskParams": {
+      "NodeTaskParams": {
+          "properties": {
+              "nodeId": {
+                  "type": "string"
+              },
+              "data": {
+                  "properties": {
+                      "graphName": {
+                          "type": "string"
+                      }
+                  }
+              }
+          }
+      },
+      "GroupTaskParams": {
           "properties": {
               "startDelay": {
                   "type": "integer"
@@ -457,12 +507,14 @@
               },
               "nodegroupId": {
                   "type": "string"
+              },
+              "nodeId": {
+                  "type": "string"
               }
           },
           "required": [
               "taskId",
-              "taskName",
-              "nodegroupId"
+              "taskName"
           ]
       },
       "TaskResult": {
@@ -476,6 +528,9 @@
               "nodegroupId": {
                   "type": "string"
               },
+              "nodeId": {
+                  "type": "string"
+              },
               "taskrunners": {
                   "items": {
                       "$ref": "#/definitions/TaskRunner"
@@ -486,7 +541,6 @@
           "required": [
               "taskId",
               "taskName",
-              "nodegroupId",
               "taskrunners"
           ]
       },

@@ -1,12 +1,6 @@
             "name": "install-centos-6",
             "jobs": [
                 {
-                    <%- include("../jobs/http/put-noop-obm.ejs") %>
-                },
-                {
-                    <%- include("../jobs/http/post-install-centos-6.ejs") %>
-                },
-                {
                     <%- include("../jobs/tftp/get-ipxe.ejs") %>,
                     "delayBefore": 17786
                 },
