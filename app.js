@@ -38,7 +38,7 @@ Promise.all([
         })
         .delay(task.nodeDelay)
         .then(function() {
-            return node.loadEnv();
+            return node.loadContext();
         })
         .then(function() {
             return taskManager.getJobsByName(task.taskName);
