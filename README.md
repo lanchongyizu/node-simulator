@@ -79,6 +79,7 @@ The global parameters are configured in [config.js](config.js).
 | mongoUri        | the URI of MongoDB, such as `mongodb://localhost/ns`                                                                                                                                     |
 | servicePort     | the port of Node Simulator, such as `9000`                                                                                                                                               |
 | headers         | the global headers for http requests                                                                                                                                                     |
+| webhook         | the third party webhook config                                                                                                                                                           |
 | fakeIpStart     | an four-tuple array which indicates the starting fake IP address, such as [188, 1, 1, 2]                                                                                                 |
 | fakeMacStart    | an six-tuple array which indicates the starting fake MAC address, such as [0xF1, 0xF2, 1, 1, 1, 1]                                                                                       |
 | outputDirectory | **(optional)** the output directory for temporary downloaded files, the default value is 'tmp/'                                                                                          |
@@ -88,6 +89,13 @@ The global parameters are configured in [config.js](config.js).
 | logFileMaxSize  | **(optional)** Max size in bytes of the logFile, if the size is exceeded then a new file is created, a counter will become a suffix of the log file, the default value is `1048576 (1M)` |
 | logFile         | **(optional)** the log file, the default value is `node-simulator.log`                                                                                                                   |
 
+###  Third Party Webhook Config
+
+| parameter     | description                                      |
+| :-----------  | :----------------------------------------------- |
+| contextNodeId | the path of contextNodeId in the payload         |
+| taskName      | the path of taskName in the payload              |
+| taskMappings  | the mappings of taskName in the payload to Task  |
 
 Example:
 
@@ -102,6 +110,14 @@ module.exports = {
         'X-Real-IP': '<?=node.ip?>',
         'X-RackHD-API-proxy-ip': '127.0.0.1',
         'X-RackHD-API-proxy-port': '7180'
+    },
+    webhook: {
+        contextNodeId: 'nodeId',
+        taskName: 'data.graphName',
+        taskMappings: {
+            'Install ESXi': 'install-esxi',
+            'Install CentOS': 'install-centos-6'
+        },
     },
     fakeIpStart: [188, 1, 1, 2],
     fakeMacStart: [0xF1, 0xF2, 1, 1, 1, 1],

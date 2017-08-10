@@ -17,10 +17,11 @@ module.exports = {
         'X-RackHD-API-proxy-port': '7180'
     },
     webhook: {
-        nodeId: 'nodeId',
+        contextNodeId: 'nodeId',
         taskName: 'data.graphName',
-        taskMaps: {
-            'InstallEsxi': 'install-esxi'
+        taskMappings: {
+            'Install ESXi': 'install-esxi',
+            'Install CentOS': 'install-centos-6'
         },
     },
     fakeIpStart: [188, 1, 1, 2],
