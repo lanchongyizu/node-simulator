@@ -26,6 +26,7 @@ It can be used to quickly setup large scale testing environment, which is faster
 ## Quick start
 
 ```
+# Start master
 git clone https://github.com/lanchongyizu/node-simulator.git
 cd node-simulator
 npm install
@@ -33,7 +34,7 @@ npm start
 # Or use pm2 to start Node Simulator
 pm2 start node-simulator.yml
 
-# Start runners
+# Start workers
 git clone https://github.com/lanchongyizu/node-simulator.git
 cd node-simulator
 npm install
