@@ -1,0 +1,104 @@
+            "name": "discovery-with-dell-wsman-obm",
+            "jobs": [
+                {
+                    <%- include("../jobs/tftp/get-ipxe.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-profile-without-macs-ips.ejs") %>,
+                    "delayBefore": 693
+                },
+                {
+                    <%- include("../jobs/http/get-profile.ejs") %>,
+                    "delayBefore": 289
+                },
+                {
+                    <%- include("../jobs/http/get-vmlinuz.ejs") %>,
+                    "delayBefore": 205
+                },
+                {
+                    <%- include("../jobs/http/get-initrd.ejs") %>,
+                    "delayBefore": 72
+                },
+                {
+                    <%- include("../jobs/http/get-base-squashfs.ejs") %>,
+                    "delayBefore": 13872
+                },
+                {
+                    <%- include("../jobs/http/get-discovery-overlay.ejs") %>,
+                    "delayBefore": 101
+                },
+                {
+                    <%- include("../jobs/http/get-bootstrap.ejs") %>,
+                    "delayBefore": 707
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-dmi.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-ohai.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-bmc.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-lsall.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-megaraid.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                <%# download get_smart.sh %>
+                {
+                    <%- include("../jobs/http/get-smart-sh.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-smart.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                <%# download get_driveid.js %>
+                {
+                    <%- include("../jobs/http/get-driveid-js.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-driveid.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-catalog-lldp.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-set-boot-pxe-completed.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/get-task.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/post-shell-reboot-completed.ejs") %>
+                },
+                {
+                    <%- include("../jobs/http/put-dell-wsman-obm.ejs") %>
+                }]
