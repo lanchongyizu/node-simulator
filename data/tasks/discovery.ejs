@@ -8,24 +8,28 @@
                     "delayBefore": 693
                 },
                 {
-                    <%- include("../jobs/http/get-profile.ejs") %>,
+                    <%- include("../jobs/http/get-profile-with-nodeid.ejs") %>,
                     "delayBefore": 289
                 },
                 {
-                    <%- include("../jobs/http/get-vmlinuz.ejs") %>,
+                    <%- include("../jobs/http/get-vmlinuz-rancher.ejs") %>,
                     "delayBefore": 205
                 },
                 {
-                    <%- include("../jobs/http/get-initrd.ejs") %>,
+                    <%- include("../jobs/http/get-initrd-rancher.ejs") %>,
                     "delayBefore": 72
                 },
                 {
-                    <%- include("../jobs/http/get-base-squashfs.ejs") %>,
-                    "delayBefore": 13872
+                    <%- include("../jobs/http/get-cloud-config.ejs") %>,
+                    "delayBefore": 707
                 },
                 {
-                    <%- include("../jobs/http/get-discovery-overlay.ejs") %>,
-                    "delayBefore": 101
+                    <%- include("../jobs/http/get-cloud-config.ejs") %>,
+                    "delayBefore": 70
+                },
+                {
+                    <%- include("../jobs/http/get-discovery-docker.ejs") %>,
+                    "delayBefore": 13872
                 },
                 {
                     <%- include("../jobs/http/get-bootstrap.ejs") %>,

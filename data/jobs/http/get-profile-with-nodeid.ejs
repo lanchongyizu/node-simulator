@@ -1,0 +1,15 @@
+                    "log": "Http get profile",
+                    "protocol": "http",
+                    "method": "GET",
+                    "headers": {
+                        "X-Real-IP": "<?=node.ip?>",
+                        "X-RackHD-API-proxy-ip": "127.0.0.1",
+                        "X-RackHD-API-proxy-port": "7180"
+                    },
+                    "uri": "http://172.31.128.1:9080/api/current/profiles?macs=<?=node.mac?>&ips=<?=node.ip?>",
+                    "regularExpressionExtractor": {
+                        "regularExpression": "nodeId=([a-z0-9-]*)",
+                        "referenceName": "nodeId",
+                        "matchNumber": 1
+                    },
+                    "delayBefore": 187
